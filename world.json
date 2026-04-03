@@ -1,0 +1,26 @@
+{
+  "initialRoomId": "room_1",
+  "rooms": {
+    "room_1": {
+      "name": "Το Κελί",
+      "description": "Είσαι σε ένα σκοτεινό κελί. Υπάρχει μια πόρτα στα βόρεια (north).",
+      "exits": { "north": "room_2" },
+      "items": [
+        {
+          "name": "sword",
+          "description": "Ένα σκουριασμένο σπαθί."
+        }
+      ]
+    },
+    "room_2": {
+      "name": "Ο Διάδρομος",
+      "description": "Ένας μακρύς διάδρομος. Νότια (south) είναι το κελί. Ανατολικά (east) υπάρχει φως.",
+      "exits": { "south": "room_1", "east": "room_3" }
+    },
+    "room_3": {
+      "name": "Tο μπουντρούμι",
+      "description": "Είσαι στην έξοδο του μπουντρουμιού.",
+      "exits": { "west": "room_2" }
+    }
+  }
+}
