@@ -1,13 +1,14 @@
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         // 1. Φόρτωση του κόσμου
         GameLoader loader = new GameLoader();
-        GameState state = loader.load("world.json");
+        Optional<GameState> OptionalState = loader.load("world.json");
 
-        if (state == null) return;
-
+        if (OptionalState.isEmpty()) return;
+        GameState state = OptionalState.get();
 
         Parser parser = new Parser();
         Scanner scanner = new Scanner(System.in);
@@ -27,10 +28,10 @@ public class Main {
                 break;
             }
 
-            Command cmd = parser.parseInput(input);
+            Optional<Command> cmd = parser.parseInput(input);
 
-            if (cmd != null) {
-                cmd.execute(state);
+            if (cmd.isPresent()) {
+                cmd.get().execute(state);
             } else {
                 System.out.println("Δεν καταλαβαίνω. Δοκίμασε 'go north', 'go south' ή 'quit'.");
             }
