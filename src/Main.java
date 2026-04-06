@@ -8,11 +8,13 @@ public class Main {
         Optional<GameState> OptionalState = loader.load("world.json");
         Optional<GrammarConfig> grammarOpt = loader.loadGrammar("grammar.json");
 
+        Parser parser;
+
         if (OptionalState.isEmpty()) return;
         GameState state = OptionalState.get();
 
         if (grammarOpt.isPresent()) {
-            Parser parser = new Parser(grammarOpt.get());
+            parser = new Parser(grammarOpt.get());
         }
         else{
             System.out.println("No grammar found");
@@ -30,19 +32,13 @@ public class Main {
             System.out.print("\n> ");
             String input = scanner.nextLine();
 
-            if (input.equals("quit")) {
-                System.out.println("Αντίο!");
-                break;
-            }
+            Optional<Command> cmdOpt = parser.parseInput(input);
 
-            Optional<Command> cmd = parser.parseInput(input);
-
-            if (cmd.isPresent()) {
-                cmd.get().execute(state);
+            if (cmdOpt.isPresent()) {
+                cmdOpt.get().execute(state);
             } else {
                 System.out.println("Δεν καταλαβαίνω. Δοκίμασε 'go north', 'go south' ή 'quit'.");
             }
         }
-        scanner.close();
     }
 }
