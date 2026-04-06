@@ -1,0 +1,9 @@
+{
+  "grammar": {
+    "go": ["move", "walk"],
+    "take": ["grab","pull","collect"]
+  },
+  "replacements": {
+    "pick up": "take"
+  }
+}

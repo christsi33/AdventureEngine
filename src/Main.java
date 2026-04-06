@@ -6,11 +6,18 @@ public class Main {
         // 1. Φόρτωση του κόσμου
         GameLoader loader = new GameLoader();
         Optional<GameState> OptionalState = loader.load("world.json");
+        Optional<GrammarConfig> grammarOpt = loader.loadGrammar("grammar.json");
 
         if (OptionalState.isEmpty()) return;
         GameState state = OptionalState.get();
 
-        Parser parser = new Parser();
+        if (grammarOpt.isPresent()) {
+            Parser parser = new Parser(grammarOpt.get());
+        }
+        else{
+            System.out.println("No grammar found");
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
 
 
