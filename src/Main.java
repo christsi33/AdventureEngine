@@ -3,15 +3,16 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // 1. Φόρτωση του κόσμου
+
         GameLoader loader = new GameLoader();
-        Optional<GameState> OptionalState = loader.load("world.json");
-        Optional<GrammarConfig> grammarOpt = loader.loadGrammar("grammar.json");
+        Optional<GameState> OptionalState = loader.load("resourses/world.json");
+        Optional<GrammarConfig> grammarOpt = loader.loadGrammar("resourses/grammar.json");
 
         Parser parser;
 
         if (OptionalState.isEmpty()) return;
         GameState state = OptionalState.get();
+        state.setupGame();
 
         if (grammarOpt.isPresent()) {
             parser = new Parser(grammarOpt.get());
@@ -23,7 +24,11 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
 
-        System.out.println("Καλώς ήρθες, " + state.player.name + "!");
+        System.out.println("Welcome! Whats your name?" );
+        String name = scanner.nextLine();
+        state.getPlayer().setName(name);
+
+        System.out.println("Welcome " + name + "!");
         System.out.println("[" + state.getCurrentRoom().name + "]");
         System.out.println(state.getCurrentRoom().description);
 
@@ -37,7 +42,7 @@ public class Main {
             if (cmdOpt.isPresent()) {
                 cmdOpt.get().execute(state);
             } else {
-                System.out.println("Δεν καταλαβαίνω. Δοκίμασε 'go north', 'go south' ή 'quit'.");
+                System.out.println("Δεν καταλαβαίνω. Δοκίμασε 'go north', 'go south'ad.");
             }
         }
     }

@@ -38,7 +38,6 @@ public class Parser {
             }
         }
 
-        // Το "2" σημαίνει: σπάσε το μόνο στο πρώτο κενό που θα βρεις
         String[] parts = input.split("\\s+", 2);
         String verb = parts[0];
         String argument = (parts.length > 1) ? parts[1] : "";
@@ -59,6 +58,8 @@ public class Parser {
             case "take":
                 //return new TakeCommand(arg);
                 //TODO takecommand
+            case "inventory":
+                return new InventoryCommand();
             default:
                 System.out.println(action + " is not a valid command");
                 return null;

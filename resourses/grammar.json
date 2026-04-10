@@ -1,7 +1,8 @@
 {
   "grammar": {
     "go": ["move", "walk"],
-    "take": ["grab","pull","collect"]
+    "take": ["grab","pull","collect"],
+    "inventory": ["inv","bag","items"]
   },
   "replacements": {
     "pick up": "take"

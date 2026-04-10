@@ -2,9 +2,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    public String name = "Hero";
-    public int maxInventorySize = 10;
+    private String name;
+    private List<Item> inventory;
 
-    // Το σακίδιο τώρα δέχεται αντικείμενα (Items)
-    public List<Item> inventory = new ArrayList<>();
+    public Player(String name) {
+        this.name = name;
+        this.inventory = new ArrayList<>();
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void addItem(Item item) {
+        inventory.add(item);
+    }
+
+    public void showInventory() {
+        if (inventory.isEmpty()) {
+            System.out.println("You have nothing on you.");
+        }
+        else {
+            System.out.println("Yoy have :");
+            for(Item item : inventory) {
+                System.out.println("- " + item.getName() + ": " + item.getDescription());
+            }
+        }
+    }
 }
