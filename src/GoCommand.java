@@ -9,7 +9,6 @@ public class GoCommand implements Command {
     public void execute(GameState state) {
         Room currentRoom = state.getCurrentRoom();
 
-        // Ελέγχει αν υπάρχει πόρτα προς αυτή την κατεύθυνση
         if (currentRoom.exits != null && currentRoom.exits.containsKey(direction)) {
             state.currentRoomId = currentRoom.exits.get(direction);
             Room newRoom = state.getCurrentRoom();

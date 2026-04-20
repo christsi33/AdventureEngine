@@ -56,8 +56,7 @@ public class Parser {
             case "go":
                 return new GoCommand(arg);
             case "take":
-                //return new TakeCommand(arg);
-                //TODO takecommand
+                return new TakeCommand(arg);
             case "inventory":
                 return new InventoryCommand();
             default:
