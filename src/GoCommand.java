@@ -1,5 +1,5 @@
 public class GoCommand implements Command {
-    private String direction;
+    private final String direction;
 
     public GoCommand(String direction) {
         this.direction = direction;
@@ -7,6 +7,11 @@ public class GoCommand implements Command {
 
     @Override
     public void execute(GameState state) {
+        if (direction == null || direction.isEmpty()) {
+            System.out.println("Προς τα πού θέλεις να πας; (π.χ. 'go north')");
+            return;
+        }
+
         Room currentRoom = state.getCurrentRoom();
 
         if (currentRoom.exits != null && currentRoom.exits.containsKey(direction)) {

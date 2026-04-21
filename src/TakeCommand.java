@@ -16,7 +16,7 @@ public class TakeCommand implements Command {
         Player player = state.getPlayer();
 
         if(currentRoom.locations != null){
-            for(Location loc : currentRoom.locations){
+            for(Room.Location loc : currentRoom.locations){
                 if(loc.items != null){
                     for(int i = 0; i < loc.items.size(); i++){
                         Item item = loc.items.get(i);

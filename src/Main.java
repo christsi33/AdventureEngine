@@ -42,7 +42,7 @@ public class Main {
             if (cmdOpt.isPresent()) {
                 cmdOpt.get().execute(state);
             } else {
-                System.out.println("Δεν καταλαβαίνω. Δοκίμασε 'go north', 'go south'ad.");
+                System.out.println("Δεν καταλαβαίνω. Δοκίμασε 'go north', 'go south'.");
             }
         }
     }

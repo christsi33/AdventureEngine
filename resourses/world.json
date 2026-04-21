@@ -1,26 +1,216 @@
 {
-  "initialRoomId": "room_1",
+  "initialRoomId": "shelter",
   "rooms": {
-    "room_1": {
-      "name": "Το Κελί",
-      "description": "Είσαι σε ένα σκοτεινό κελί. Υπάρχει μια πόρτα στα βόρεια (north).",
-      "exits": { "north": "room_2" },
-      "items": [
+    "shelter": {
+      "name": "The Shelter",
+      "description": "A small, concrete room with a heavy atmosphere.",
+      "exits": { "north": "hallway" },
+      "locations": [
         {
-          "name": "sword",
-          "description": "Ένα σκουριασμένο σπαθί."
+          "id": "bed",
+          "name": "Old rusty bed",
+          "description": "An old rusty bed. Something is sticking out under the mattress.",
+          "trap": null,
+          "items": [
+            {
+              "id": "flashlight",
+              "name": "flashlight",
+              "description": "A heavy military flashlight. It will come in handy in the dark."
+            }
+          ]
+        },
+        {
+          "id": "locker",
+          "name": "Rusty locker",
+          "description": "It's half-opened and squeaks.",
+          "trap": null,
+          "items": [
+            {
+              "id": "gloves",
+              "name": "Rubber Gloves",
+              "description": " "
+            }
+          ]
         }
       ]
     },
-    "room_2": {
-      "name": "Ο Διάδρομος",
-      "description": "Ένας μακρύς διάδρομος. Νότια (south) είναι το κελί. Ανατολικά (east) υπάρχει φως.",
-      "exits": { "south": "room_1", "east": "room_3" }
+    "hallway": {
+      "name": "The Hallway",
+      "description": "A long corridor. The lights flicker and there are broken pipes.",
+      "exits": {
+        "south": "shelter",
+        "east": "storage_room",
+        "west": "garage"
+      },
+      "locations": [
+        {
+          "id": "electrical_panel",
+          "name": "Electrical Panel",
+          "description": "The main panel. The wires are bare and they are carrying electricity.",
+          "trap": {
+            "trigger": "interact",
+            "required_item": "gloves",
+            "game_over_message": "You touched bare wires. Electricity passed through your body. GAME OVER!"
+          },
+          "items": [
+            {
+              "id": "blue_keycard",
+              "name": "Blue Keycard",
+              "description": "A plastic access card with a blue stripe."
+            }
+          ]
+        },
+        {
+          "id": "gas_pipes",
+          "name": "Gas Pipes",
+          "description": "Some pipes have cracks. A piece of duct tape is lying next to it.",
+          "trap": null,
+          "items": [
+            {
+              "id": "duct_tape",
+              "name": "Duct Tape",
+              "description": "Classic silver tape. Fixes everything."
+            },
+            {
+              "id": "metal_pipe",
+              "name": "Metal Pipe",
+              "description": "A heavy, solid iron pipe. Can be used as a lever."
+            }
+          ]
+        }
+      ]
     },
-    "room_3": {
-      "name": "Tο μπουντρούμι",
-      "description": "Είσαι στην έξοδο του μπουντρουμιού.",
-      "exits": { "west": "room_2" }
+    "storage_room": {
+      "name": "Storage Room",
+      "description": "A dark windowless room filled with empty shelves. It smells like rot.",
+      "exits": {
+        "west": "hallway"
+      },
+      "locations": [
+        {
+          "id": "shelves",
+          "name": "Dusty Shelves",
+          "description": "Mostly empty cans, but there is a box at the top",
+          "trap": null,
+          "items": [
+            {
+              "id": "gas_mask",
+              "name": "Gas Mask",
+              "description": "An old military gas mask with a fresh filter."
+            }
+          ]
+        },
+        {
+          "id": "heavy_door",
+          "name": "Heavy Iron Door",
+          "description": "The door is on a spring mechanism. It wants to slam shut.",
+          "trap": {
+            "trigger": "enter",
+            "required_item": "metal_pipe",
+            "game_over_message": "The heavy door slammed shut behind you. It's locked from outside. You are trapped forever. GAME OVER!"
+          },
+          "items": []
+        }
+      ]
+    },
+    "garage": {
+      "name": "The Garage",
+      "description": "A spacious room with a rusted jeep in the middle. The smell of gasoline is overwhelming.",
+      "exits": {
+        "east": "hallway",
+        "north": "clinic"
+      },
+      "locations": [
+        {
+          "id": "workbench",
+          "name": "Workbench",
+          "description": "Covered in oil and rusty tools.",
+          "trap": null,
+          "items": [
+            {
+              "id": "wire_cutters",
+              "name": "Wire Cutters",
+              "description": "Sharp enough to cut thick wires."
+            }
+          ]
+        },
+        {
+          "id": "car",
+          "name": "Abandoned Jeep",
+          "description": "The keys are still in the ignition.",
+          "trap": {
+            "trigger": "interact",
+            "required_item": "impossible_item",
+            "game_over_message": "You started the engine. The enclosed space quickly filled with carbon monoxide. GAME OVER!"
+          },
+          "items": []
+        }
+      ]
+    },
+    "clinic": {
+      "name": "The Clinic",
+      "description": "Overturned stretchers and broken glass everywhere.",
+      "exits": {
+        "south": "garage",
+        "east": "exit_room"
+      },
+      "locations": [
+        {
+          "id": "desk",
+          "name": "Doctor's Desk",
+          "description": "Covered in scattered files.",
+          "trap": null,
+          "items": [
+            {
+              "id": "red_key",
+              "name": "Red Key",
+              "description": "A small key with a red tag."
+            }
+          ]
+        },
+        {
+          "id": "quarantine_door",
+          "name": "Quarantine Door",
+          "description": "A sealed glass door. There is a huge BIOHAZARD warning sign on it.",
+          "trap": {
+            "trigger": "interact",
+            "required_item": "gas_mask",
+            "game_over_message": "You breathed in the airborne pathogen. Your lungs gave out within seconds. GAME OVER!"
+          },
+          "items": []
+        }
+      ]
+    },
+    "exit_room": {
+      "name": "Emergency Exit",
+      "description": "A massive steel gate leading to the surface. Freedom is close.",
+      "exits": {
+        "west": "clinic"
+      },
+      "locations": [
+        {
+          "id": "bomb",
+          "name": "Explosive Device",
+          "description": "A C4 charge wired directly to the gate's lock. It has a red and a blue wire.",
+          "trap": {
+            "trigger": "interact",
+            "required_item": "wire_cutters",
+            "game_over_message": "You tried to force the gate. The bomb detonated instantly. GAME OVER!"
+          },
+          "items": []
+        },
+        {
+          "id": "gate",
+          "name": "Main Gate",
+          "description": "The final barrier. It has a keyhole with a red rim and a card reader with a blue light.",
+          "trap": {
+            "trigger": "interact",
+            "required_item": "red_key",
+            "game_over_message": "The system locked down. You need the red key and blue keycard. (This trap just blocks progress, doesn't kill you)"
+          },
+          "items": []
+        }
+      ]
     }
   }
 }
