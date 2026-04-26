@@ -20,7 +20,10 @@ public class TakeCommand implements Command {
                 if(loc.items != null){
                     for(int i = 0; i < loc.items.size(); i++){
                         Item item = loc.items.get(i);
-                        if(item.getId().equalsIgnoreCase(targetItem) || item.getName().equalsIgnoreCase(targetItem)){
+                        String cleanTarget = targetItem.toLowerCase().replace("_", " ");
+                        String cleanId = item.getId().toLowerCase().replace("_", " ");
+                        String cleanName = item.getName().toLowerCase();
+                        if (cleanId.contains(cleanTarget) || cleanName.contains(cleanTarget)) {
                             loc.items.remove(item);
                             player.addItem(item);
                             System.out.println("You got [" + item.getName() + "] at: " + loc.name);

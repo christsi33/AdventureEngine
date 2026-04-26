@@ -34,7 +34,9 @@ public class Main {
 
         while (true) {
             System.out.print("\n> ");
-            String input = scanner.nextLine();
+            String input = scanner.nextLine().toLowerCase();
+            input = input.replaceAll("\\b(to|the|a|an|in|on|at|into)\\b", "");
+            input = input.replaceAll("\\s+", " ").trim();
 
             Optional<Command> cmdOpt = parser.parseInput(input);
 

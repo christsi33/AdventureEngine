@@ -37,7 +37,11 @@ public class LookCommand  implements Command {
 
         if (currentRoom.locations != null) {
             for (Room.Location loc : currentRoom.locations) {
-                if (loc.id.equalsIgnoreCase(target) || loc.name.equalsIgnoreCase(target)) {
+                String cleanTarget = target.toLowerCase().replace("_", " ");
+                String cleanId = loc.id.toLowerCase().replace("_", " ");
+                String cleanName = loc.name.toLowerCase();
+
+                if (cleanId.contains(cleanTarget) || cleanName.contains(cleanTarget)){
 
                     System.out.println("\n--- Examining: " + loc.name + " ---");
 
@@ -67,7 +71,7 @@ public class LookCommand  implements Command {
             }
         }
 
-        System.out.println("There is nothing " + target + "around there.");
+        System.out.println("There is no " + target + "around there.");
     }
 }
 
