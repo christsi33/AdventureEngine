@@ -59,6 +59,8 @@ public class Parser {
                 return new TakeCommand(arg);
             case "inventory":
                 return new InventoryCommand();
+            case "look":
+                return new LookCommand(arg);
             default:
                 System.out.println(action + " is not a valid command");
                 return null;

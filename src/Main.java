@@ -29,9 +29,8 @@ public class Main {
         state.getPlayer().setName(name);
 
         System.out.println("Welcome " + name + "!");
-        System.out.println("[" + state.getCurrentRoom().name + "]");
-        System.out.println(state.getCurrentRoom().description);
-
+        System.out.println("\n--- ΕΝΑΡΞΗ ΠΕΡΙΠΕΤΕΙΑΣ ---"); //todo beginning message..!
+        new LookCommand("").execute(state);
 
         while (true) {
             System.out.print("\n> ");

@@ -16,9 +16,7 @@ public class GoCommand implements Command {
 
         if (currentRoom.exits != null && currentRoom.exits.containsKey(direction)) {
             state.currentRoomId = currentRoom.exits.get(direction);
-            Room newRoom = state.getCurrentRoom();
-            System.out.println("\n[" + newRoom.name + "]");
-            System.out.println(newRoom.description);
+            new LookCommand("").execute(state);
         } else {
             System.out.println("Δεν υπάρχει δρόμος προς τα εκεί.");
         }

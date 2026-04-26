@@ -1,10 +1,12 @@
 {
   "grammar": {
-    "go": ["move", "walk"],
-    "take": ["grab","pull","collect"],
-    "inventory": ["inv","bag","items"]
+    "go": ["move", "walk","run","head"],
+    "take": ["grab","pull","collect","pick","get"],
+    "inventory": ["inv","bag","items","i"],
+    "look": ["see", "inspect","examine","search","see","x"]
   },
   "replacements": {
-    "pick up": "take"
+    "pick up": "take",
+    "look at": "look"
   }
 }
