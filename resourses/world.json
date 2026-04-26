@@ -206,7 +206,7 @@
           "trap": {
             "trigger": "interact",
             "required_item": "red_key",
-            "game_over_message": "The system locked down. You need the red key and blue keycard. (This trap just blocks progress, doesn't kill you)"
+            "game_over_message": "The system detected unauthorized access. The room filled with toxic gas and locked down permanently. GAME OVER!"
           },
           "items": []
         }
