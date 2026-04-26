@@ -33,4 +33,14 @@ public class Player {
             }
         }
     }
+
+    public boolean hasItem(String itemId){
+        for (Item item : inventory) {
+            if (item.getId().equalsIgnoreCase(itemId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

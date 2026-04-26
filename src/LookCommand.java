@@ -39,16 +39,28 @@ public class LookCommand  implements Command {
             for (Room.Location loc : currentRoom.locations) {
                 if (loc.id.equalsIgnoreCase(target) || loc.name.equalsIgnoreCase(target)) {
 
-                    System.out.println("\nLooking for: " + loc.name + " ---");
+                    System.out.println("\n--- Examining: " + loc.name + " ---");
+
+                    if (loc.trap != null && "interact".equalsIgnoreCase(loc.trap.trigger)) {
+                        if (!state.getPlayer().hasItem(loc.trap.required_item)) {
+                            System.out.println("\n!!! TRAP ACTIVATED !!!");
+                            System.out.println(loc.trap.game_over_message);
+                            System.out.println("\n--- GAME OVER ---");
+                            System.exit(0);
+                        } else {
+                            System.out.println("[Safe: You are using the " + loc.trap.required_item + "]");
+                        }
+                    }
+
                     System.out.println(loc.description);
 
                     if (loc.items != null && !loc.items.isEmpty()) {
-                        System.out.println("You found:");
+                        System.out.println("You discover the following items:");
                         for (Item item : loc.items) {
-                            System.out.println("- " + item.getName());
+                            System.out.println("- " + item.getName() + " (type 'take " + item.getId() + "' to pick it up)");
                         }
                     } else {
-                        System.out.println("There is nothing useful here.");
+                        System.out.println("There is nothing of interest here.");
                     }
                     return;
                 }

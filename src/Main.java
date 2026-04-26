@@ -29,7 +29,7 @@ public class Main {
         state.getPlayer().setName(name);
 
         System.out.println("Welcome " + name + "!");
-        System.out.println("\n--- ΕΝΑΡΞΗ ΠΕΡΙΠΕΤΕΙΑΣ ---"); //todo beginning message..!
+        System.out.println("\n--- ADVENTURE START ---"); //todo beginning message..!
         new LookCommand("").execute(state);
 
         while (true) {
