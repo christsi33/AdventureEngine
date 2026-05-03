@@ -62,7 +62,7 @@ public class LookCommand  implements Command {
                     if (loc.items != null && !loc.items.isEmpty()) {
                         ui.print("look_items_discovered");
                         for (Item item : loc.items) {
-                            ui.print("look_item_detail", item.getName(), item.getId());
+                            ui.print("look_item_detail");
                         }
                     } else {
                         ui.print("look_nothing_interest");

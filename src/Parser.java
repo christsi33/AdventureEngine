@@ -61,6 +61,8 @@ public class Parser {
                 return new InventoryCommand();
             case "look":
                 return new LookCommand(arg);
+            case "open":
+                return new OpenCommand(arg);
             default:
                 return null;
         }

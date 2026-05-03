@@ -3,7 +3,8 @@
     "go": ["move", "walk","run","head"],
     "take": ["grab","pull","collect","pick","get"],
     "inventory": ["inv","bag","items","i"],
-    "look": ["see", "inspect","examine","search","see","x"]
+    "look": ["see", "inspect","examine","search","see","x"],
+    "open": ["unlock", "use"]
   },
   "replacements": {
     "pick up": "take",
