@@ -5,8 +5,8 @@ public class Main {
     public static void main(String[] args) {
 
         GameLoader loader = new GameLoader();
-        Optional<GameState> OptionalState = loader.load("resourses/world.json");
-        Optional<GrammarConfig> grammarOpt = loader.loadGrammar("resourses/grammar.json");
+        Optional<GameState> OptionalState = loader.load("recourses/world.json");
+        Optional<GrammarConfig> grammarOpt = loader.loadGrammar("recourses/grammar.json");
 
         Parser parser;
 
@@ -14,26 +14,24 @@ public class Main {
         GameState state = OptionalState.get();
         state.setupGame();
 
+        GameUI ui = new GameUI("recourses/messages.json");
+        state.setUI(ui);
+
         if (grammarOpt.isPresent()) {
             parser = new Parser(grammarOpt.get());
         }
         else{
-            System.out.println("No grammar found");
+            ui.print("no_grammar");
             return;
         }
         Scanner scanner = new Scanner(System.in);
 
+        ui.print("welcome");
 
-        System.out.println("Welcome! Whats your name?" );
-        String name = scanner.nextLine();
-        state.getPlayer().setName(name);
-
-        System.out.println("Welcome " + name + "!");
-        System.out.println("\n--- ADVENTURE START ---"); //todo beginning message..!
         new LookCommand("").execute(state);
 
         while (true) {
-            System.out.print("\n> ");
+            ui.printInline("prompt");
             String input = scanner.nextLine().toLowerCase();
             input = input.replaceAll("\\b(to|the|a|an|in|on|at|into)\\b", "");
             input = input.replaceAll("\\s+", " ").trim();
@@ -43,7 +41,7 @@ public class Main {
             if (cmdOpt.isPresent()) {
                 cmdOpt.get().execute(state);
             } else {
-                System.out.println("Δεν καταλαβαίνω. Δοκίμασε 'go north', 'go south'.");
+                ui.print("unknown_command", input);
             }
         }
     }

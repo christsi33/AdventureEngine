@@ -13,24 +13,25 @@ public class LookCommand  implements Command {
     @Override
     public void execute(GameState state){
         Room currentRoom = state.getCurrentRoom();
+        GameUI ui = state.getUI();
 
         if (target.isEmpty()) {
-            System.out.println("\n=== [" + currentRoom.name + "] ===");
-            System.out.println(currentRoom.description);
+           ui.print("look_room_title", currentRoom.name);
+           ui.printRaw(currentRoom.description);
 
             if (currentRoom.locations != null && !currentRoom.locations.isEmpty()) {
-                System.out.println("\nIn the space you can distinguish the following points: ");
+                ui.print("look_points_of_interest");
                 for (Room.Location loc : currentRoom.locations) {
-                    System.out.println("- " + loc.name + " (id: " + loc.id + ")");
+                    ui.print("look_point_item", loc.name, loc.id);
                 }
             }
 
             if (currentRoom.exits != null && !currentRoom.exits.isEmpty()) {
-                System.out.print("\nExits: ");
+                ui.print("look_exits");
                 for (String direction : currentRoom.exits.keySet()) {
-                    System.out.print("[" + direction + "] ");
+                    ui.print("look_exit_item", direction);
                 }
-                System.out.println();
+                ui.printRaw("");
             }
             return;
         }
@@ -43,35 +44,35 @@ public class LookCommand  implements Command {
 
                 if (cleanId.contains(cleanTarget) || cleanName.contains(cleanTarget)){
 
-                    System.out.println("\n--- Examining: " + loc.name + " ---");
+                    ui.print("look_examining", loc.name);
 
                     if (loc.trap != null && "interact".equalsIgnoreCase(loc.trap.trigger)) {
                         if (!state.getPlayer().hasItem(loc.trap.required_item)) {
-                            System.out.println("\n!!! TRAP ACTIVATED !!!");
-                            System.out.println(loc.trap.game_over_message);
-                            System.out.println("\n--- GAME OVER ---");
+                            ui.print("trap_activated");
+                            ui.printRaw(loc.trap.game_over_message);
+                            ui.print("game_over");
                             System.exit(0);
                         } else {
-                            System.out.println("[Safe: You are using the " + loc.trap.required_item + "]");
+                            ui.print("trap_safe_interact", loc.trap.required_item);
                         }
                     }
 
-                    System.out.println(loc.description);
+                    ui.printRaw(loc.description);
 
                     if (loc.items != null && !loc.items.isEmpty()) {
-                        System.out.println("You discover the following items:");
+                        ui.print("look_items_discovered");
                         for (Item item : loc.items) {
-                            System.out.println("- " + item.getName() + " (type 'take " + item.getId() + "' to pick it up)");
+                            ui.print("look_item_detail", item.getName(), item.getId());
                         }
                     } else {
-                        System.out.println("There is nothing of interest here.");
+                        ui.print("look_nothing_interest");
                     }
                     return;
                 }
             }
         }
 
-        System.out.println("There is no " + target + "around there.");
+        ui.print("look_not_found", target);
     }
 }
 

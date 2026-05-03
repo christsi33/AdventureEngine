@@ -62,7 +62,6 @@ public class Parser {
             case "look":
                 return new LookCommand(arg);
             default:
-                System.out.println(action + " is not a valid command");
                 return null;
         }
     }

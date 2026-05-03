@@ -11,8 +11,10 @@ public class GoCommand implements Command {
 
     @Override
     public void execute(GameState state) {
+        GameUI ui = state.getUI();
+
         if (direction.isEmpty()) {
-            System.out.println("Where do you want to go?");
+            ui.print("go_where");
             return;
         }
 
@@ -27,12 +29,12 @@ public class GoCommand implements Command {
                 for(Room.Location loc : nextRoom.locations) {
                     if(loc.trap != null && "enter".equalsIgnoreCase(loc.trap.trigger)){
                         if (!state.getPlayer().hasItem(loc.trap.required_item)) {
-                            System.out.println("\n!!! TRAP ACTIVATED !!!");
-                            System.out.println(loc.trap.game_over_message);
-                            System.out.println("\n--- GAME OVER ---");
+                            ui.print("trap_activated");
+                            ui.printRaw(loc.trap.game_over_message); // Αυτό έρχεται από το world.json
+                            ui.print("game_over");
                             System.exit(0);
                         } else {
-                            System.out.println("\n[Safe: Your " + loc.trap.required_item + " prevented a trap!]");
+                            ui.print("trap_safe_enter", loc.trap.required_item);
                         }
                     }
                 }
@@ -40,7 +42,7 @@ public class GoCommand implements Command {
             state.currentRoomId = nextRoomId;
             new LookCommand("").execute(state);
         } else {
-            System.out.println("There is no path in that direction.");
+            ui.print("go_no_path");
         }
     }
 }

@@ -7,8 +7,10 @@ public class TakeCommand implements Command {
 
     @Override
     public void execute(GameState state){
+        GameUI ui = state.getUI();
+
         if(targetItem == null || targetItem.isEmpty()){
-            System.out.println("You need to enter a target item");
+            ui.print("take_what");
             return;
         }
 
@@ -26,13 +28,13 @@ public class TakeCommand implements Command {
                         if (cleanId.contains(cleanTarget) || cleanName.contains(cleanTarget)) {
                             loc.items.remove(item);
                             player.addItem(item);
-                            System.out.println("You got [" + item.getName() + "] at: " + loc.name);
+                            ui.print("take_success", item.getName());
                             return;
                         }
                     }
                 }
             }
         }
-        System.out.println("I can't see any "+ targetItem + " around you");
+        ui.print("take_not_found", targetItem);
     }
 }
