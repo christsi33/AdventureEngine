@@ -19,6 +19,11 @@ public class Main {
 
         if (grammarOpt.isPresent()) {
             parser = new Parser(grammarOpt.get());
+            parser.registerCommand("go", arg -> new GoCommand(arg));
+            parser.registerCommand("take", arg -> new TakeCommand(arg));
+            parser.registerCommand("look", arg -> new LookCommand(arg));
+            parser.registerCommand("inventory", arg -> new InventoryCommand());
+            parser.registerCommand("open", arg -> new OpenCommand(arg));
         }
         else{
             ui.print("no_grammar");

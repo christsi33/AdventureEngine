@@ -9,20 +9,24 @@ public class Parser {
 
     private Map<String, Function<String, Command>> dictionary;
 
+    private GrammarConfig config;
+
     public Parser(GrammarConfig config){
-        this.replacements = config.replacements;
-        this.dictionary = new HashMap<>();
+       this.replacements = config.replacements;
+       this.dictionary = new HashMap<>();
+       this.config = config;
+    }
 
-        if(config.grammar != null){
-            config.grammar.forEach((mainVerb, synonyms) -> {
-                dictionary.put(mainVerb, arg -> createCommand(mainVerb, arg));
+    public void registerCommand(String mainVerb, Function<String, Command> creator){
+        dictionary.put(mainVerb, creator);
 
-                if(synonyms != null){
-                    for(String s : synonyms){
-                        dictionary.put(s, arg -> createCommand(mainVerb, arg));
-                    }
+        if(config.grammar != null && config.grammar.containsKey(mainVerb)){
+            List<String> synonyms = config.grammar.get(mainVerb);
+            if(synonyms != null){
+                for (String s : synonyms) {
+                    dictionary.put(s, creator);
                 }
-            });
+            }
         }
     }
 
@@ -49,22 +53,5 @@ public class Parser {
             }
         }
         return Optional.empty();
-    }
-
-    private Command createCommand(String action, String arg) {
-        switch (action) {
-            case "go":
-                return new GoCommand(arg);
-            case "take":
-                return new TakeCommand(arg);
-            case "inventory":
-                return new InventoryCommand();
-            case "look":
-                return new LookCommand(arg);
-            case "open":
-                return new OpenCommand(arg);
-            default:
-                return null;
-        }
     }
 }
