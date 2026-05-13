@@ -1,8 +1,26 @@
+import java.util.List;
+
 public class OpenCommand implements Command {
     private String target;
+    private String tool;
 
-    public OpenCommand(String target) {
+    public OpenCommand(String argument) {
         this.target = (target == null) ? "" : target.toLowerCase().replace("_","").trim();
+
+        if(argument.contains("on")){
+            String[] parts = argument.split("on", 2);
+            this.tool = parts[0].trim();
+            this.target = parts[1].trim();
+        }
+        else if(argument.contains("with")){
+            String[] parts = argument.split("with", 2);
+            this.tool = parts[0].trim();
+            this.target = parts[1].trim();
+        }
+        else{
+            this.tool = argument;
+            this.tool = "";
+        }
     }
 
     @Override
@@ -15,30 +33,45 @@ public class OpenCommand implements Command {
         }
 
         Room currentRoom = state.getCurrentRoom();
+        Player player = state.getPlayer();
 
-        if (target.contains("gate") || target.contains("door")) {
+        if (currentRoom.locations != null) {
+            for (Room.Location loc : currentRoom.locations) {
+                String cleanTarget = target.replace("the ", "");
 
-            if (currentRoom.name.equalsIgnoreCase("Emergency Exit")) {
+                if (loc.id.equalsIgnoreCase(cleanTarget) || loc.name.toLowerCase().contains(cleanTarget)) {
 
-                Player player = state.getPlayer();
+                    if (loc.locked_with != null && !loc.locked_with.isEmpty()) {
 
-                boolean hasRedKey = player.hasItem("red_key");
-                boolean hasBlueCard = player.hasItem("blue_keycard");
+                        if (!tool.isEmpty() && !player.hasItem(tool)) {
+                            ui.printRaw("You don't have the '" + tool + "' in your inventory.");
+                            return;
+                        }
 
-                if (hasRedKey && hasBlueCard) {
-                    ui.print("open_gate_success_1");
-                    ui.print("open_gate_success_2");
-                    ui.print("open_gate_success_3");
-                    ui.print("open_gate_win");
+                        boolean hasAllKeys = true;
+                        for (String requiredKeyId : loc.locked_with) {
+                            if (!player.hasItem(requiredKeyId)) {
+                                hasAllKeys = false;
+                                break;
+                            }
+                        }
 
-                    System.exit(0);
-                } else {
-                    ui.print("open_gate_fail");
+                        if (hasAllKeys) {
+                            ui.printRaw(loc.unlock_message != null ? loc.unlock_message : "You successfully opened the " + loc.name + "!");
+
+                            if (loc.is_win_condition) {
+                                ui.print("open_gate_win");
+                                System.exit(0);
+                            }
+                        } else {
+                            ui.print("open_gate_fail");
+                        }
+                    } else {
+                        ui.printRaw("The " + loc.name + " doesn't seem to be locked.");
+                    }
+                    return;
                 }
-            } else {
-                ui.print("open_no_gate");
             }
-            return;
         }
         ui.print("open_cant", target);
     }

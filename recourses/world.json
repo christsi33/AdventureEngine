@@ -202,7 +202,10 @@
         {
           "id": "gate",
           "name": "Main Gate",
-          "description": "The final barrier. It has a keyhole with a red rim and a card reader with a blue light.",
+          "description": "The final barrier. It has a keyhole with a red rim and a card reader with a blue light. The massive steel gate is blocking your escape.",
+          "locked_with": ["red_key","blue_keycard"],
+          "is_win_condition": true,
+          "unlock_message": "\n[System]: Keycard ACCEPTED. Key ACCEPTED.\n*CLANK* The massive steel gate slowly grinds open...",
           "trap": {
             "trigger": "interact",
             "required_item": "red_key",
