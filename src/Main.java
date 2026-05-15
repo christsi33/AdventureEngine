@@ -24,6 +24,9 @@ public class Main {
             parser.registerCommand("look", arg -> new LookCommand(arg));
             parser.registerCommand("inventory", arg -> new InventoryCommand());
             parser.registerCommand("open", arg -> new OpenCommand(arg));
+            parser.registerCommand("save", arg -> new SaveCommand());
+            parser.registerCommand("load", arg -> new LoadCommand());
+            parser.registerCommand("quit", arg -> new QuitCommand());
         }
         else{
             ui.print("no_grammar");

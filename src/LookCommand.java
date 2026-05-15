@@ -22,7 +22,7 @@ public class LookCommand  implements Command {
             if (currentRoom.locations != null && !currentRoom.locations.isEmpty()) {
                 ui.print("look_points_of_interest");
                 for (Room.Location loc : currentRoom.locations) {
-                    ui.print("look_point_item", loc.name, loc.id);
+                    ui.print("look_point_item", loc.name);
                 }
             }
 
@@ -62,7 +62,7 @@ public class LookCommand  implements Command {
                     if (loc.items != null && !loc.items.isEmpty()) {
                         ui.print("look_items_discovered");
                         for (Item item : loc.items) {
-                            ui.print("look_item_detail");
+                            ui.print("look_item_detail",item.getName());
                         }
                     } else {
                         ui.print("look_nothing_interest");

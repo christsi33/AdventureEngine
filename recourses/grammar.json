@@ -4,7 +4,10 @@
     "take": ["grab","pull","collect","pick","get"],
     "inventory": ["inv","bag","items","i"],
     "look": ["see", "inspect","examine","search","see","x"],
-    "open": ["unlock", "use"]
+    "open": ["unlock", "use"],
+    "save": ["quicksave"],
+    "load": ["quickload","restore"],
+    "quit": ["exit"]
   },
   "replacements": {
     "pick up": "take",

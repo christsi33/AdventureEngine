@@ -25,10 +25,18 @@ public class GameState {
     }
 
     public GameUI getUI() {
+
         return ui;
     }
 
     public void setUI(GameUI ui) {
+
         this.ui = ui;
+    }
+
+    public void restoreFrom(GameState savedState) {
+        this.currentRoomId = savedState.currentRoomId;
+        this.rooms = savedState.rooms;
+        this.player = savedState.player;
     }
 }
