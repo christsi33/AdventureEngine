@@ -7,7 +7,9 @@
     "open": ["unlock", "use"],
     "save": ["quicksave"],
     "load": ["quickload","restore"],
-    "quit": ["exit"]
+    "quit": ["exit"],
+    "undo": ["rewind", "back"],
+    "redo": ["forward"]
   },
   "replacements": {
     "pick up": "take",
