@@ -29,6 +29,7 @@ public class Main {
             parser.registerCommand("quit", arg -> new QuitCommand());
             parser.registerCommand("undo", arg -> new UndoCommand());
             parser.registerCommand("redo", arg -> new RedoCommand());
+            parser.registerCommand("help", arg -> new HelpCommand());
         }
         else{
             ui.print("no_grammar");
@@ -37,6 +38,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         ui.print("welcome");
+        ui.print("intro_lore");
 
         new LookCommand("").execute(state);
 
@@ -49,18 +51,7 @@ public class Main {
             Optional<Command> cmdOpt = parser.parseInput(input);
 
             if (cmdOpt.isPresent()) {
-                Command command = cmdOpt.get();
-
-                if(!(command instanceof UndoCommand) &&
-                    !(command instanceof RedoCommand) &&
-                    !(command instanceof LookCommand) &&
-                    !(command instanceof InventoryCommand)) {
-
-                    state.saveShot();
-                }
-
-                command.execute(state);
-
+                cmdOpt.get().execute(state);
             } else {
                 ui.print("unknown_command", input);
             }

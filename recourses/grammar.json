@@ -9,7 +9,9 @@
     "load": ["quickload","restore"],
     "quit": ["exit"],
     "undo": ["rewind", "back"],
-    "redo": ["forward"]
+    "redo": ["forward"],
+    "quit": ["exit"],
+    "help": ["manual", "controls", "commands", "rules", "info"]
   },
   "replacements": {
     "pick up": "take",
