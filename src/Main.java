@@ -39,6 +39,7 @@ public class Main {
 
         ui.print("welcome");
         ui.print("intro_lore");
+        ui.printRaw("Write /? for help menu");
 
         new LookCommand("").execute(state);
 

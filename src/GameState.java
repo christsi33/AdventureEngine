@@ -52,7 +52,7 @@ public class GameState {
 
         Gson gson = new Gson();
         String json = gson.toJson(this);
-        undoStack.push(snapshot);
+        //undoStack.push(snapshot);
         redoStack.clear();
     }
 

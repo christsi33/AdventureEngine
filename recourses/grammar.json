@@ -10,8 +10,7 @@
     "quit": ["exit"],
     "undo": ["rewind", "back"],
     "redo": ["forward"],
-    "quit": ["exit"],
-    "help": ["manual", "controls", "commands", "rules", "info"]
+    "help": ["manual", "controls", "commands", "rules", "info","/?"]
   },
   "replacements": {
     "pick up": "take",
