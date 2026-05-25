@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Stack;
+import java.util.List;
 
 import com.google.gson.Gson;
 
@@ -14,6 +16,16 @@ public class GameState {
 
     private transient Stack<String> undoStack = new Stack<>();
     private transient Stack<String> redoStack = new Stack<>();
+
+    private List<String> commandHistory = new ArrayList<>();
+
+    public void addHistory(String cmd){
+        this.commandHistory.add(cmd);
+    }
+
+    public List<String> getHistory(){
+        return this.commandHistory;
+    }
 
     public void setupGame() {
 

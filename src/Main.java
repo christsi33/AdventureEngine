@@ -25,7 +25,7 @@ public class Main {
             parser.registerCommand("inventory", arg -> new InventoryCommand());
             parser.registerCommand("open", arg -> new OpenCommand(arg));
             parser.registerCommand("save", arg -> new SaveCommand());
-            parser.registerCommand("load", arg -> new LoadCommand());
+            parser.registerCommand("load", arg -> new LoadCommand(parser));
             parser.registerCommand("quit", arg -> new QuitCommand());
             parser.registerCommand("undo", arg -> new UndoCommand());
             parser.registerCommand("redo", arg -> new RedoCommand());
@@ -52,7 +52,19 @@ public class Main {
             Optional<Command> cmdOpt = parser.parseInput(input);
 
             if (cmdOpt.isPresent()) {
-                cmdOpt.get().execute(state);
+                Command command = cmdOpt.get();
+
+                if (!(command instanceof SaveCommand) &&
+                        !(command instanceof LoadCommand) &&
+                        !(command instanceof HelpCommand) &&
+                        !(command instanceof QuitCommand) &&
+                        !(command instanceof UndoCommand) &&
+                        !(command instanceof RedoCommand)) {
+
+                    state.addHistory(input);
+                    state.saveShot();
+                }
+                command.execute(state);
             } else {
                 ui.print("unknown_command", input);
             }

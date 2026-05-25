@@ -33,6 +33,10 @@ public class GameUI {
         return msg;
     }
 
+    public void setMuted(boolean muted) {
+        this.isMuted = muted;
+    }
+
     public void print(String key, Object... args) {
         System.out.println(getMessage(key, args));
     }
