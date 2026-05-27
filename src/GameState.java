@@ -28,27 +28,22 @@ public class GameState {
     }
 
     public void setupGame() {
-
         this.currentRoomId = this.initialRoomId;
     }
 
     public Room getCurrentRoom() {
-
         return rooms.get(currentRoomId);
     }
 
     public Player getPlayer() {
-
         return player;
     }
 
     public GameUI getUI() {
-
         return ui;
     }
 
     public void setUI(GameUI ui) {
-
         this.ui = ui;
     }
 
@@ -63,9 +58,9 @@ public class GameState {
         if(redoStack == null){redoStack = new Stack<>();}
 
         Gson gson = new Gson();
-        String json = gson.toJson(this);
-        //undoStack.push(snapshot);
-        redoStack.clear();
+        String snapshot = gson.toJson(this);
+        this.undoStack.push(snapshot);
+        this.redoStack.clear();
     }
 
     public boolean undo(){

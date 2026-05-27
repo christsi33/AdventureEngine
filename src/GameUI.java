@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class GameUI {
     private Map<String, String> messages;
+    private boolean isMuted =  false;
 
     public GameUI(String filepath) {
         messages = new HashMap<>();
@@ -38,14 +39,20 @@ public class GameUI {
     }
 
     public void print(String key, Object... args) {
-        System.out.println(getMessage(key, args));
+        if(!isMuted) {
+            System.out.println(getMessage(key, args));
+        }
     }
 
     public void printInline(String key, Object... args) {
-        System.out.print(getMessage(key, args));
+        if (!isMuted) {
+            System.out.print(getMessage(key, args));
+        }
     }
 
     public void printRaw(String text) {
-        System.out.println(text);
+        if (!isMuted) {
+            System.out.println(text);
+        }
     }
 }
