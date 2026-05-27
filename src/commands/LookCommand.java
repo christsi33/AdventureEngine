@@ -1,3 +1,9 @@
+package commands;
+import view.GameUI;
+import model.GameState;
+import model.Item;
+import model.Room;
+
 public class LookCommand  implements Command {
 
     private String target;

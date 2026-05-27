@@ -1,3 +1,5 @@
+package model;
+import view.GameUI;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Stack;

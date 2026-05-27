@@ -1,3 +1,8 @@
+package commands;
+import view.GameUI;
+import model.GameState;
+import model.Room;
+
 public class GoCommand implements Command {
     private final String direction;
 

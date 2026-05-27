@@ -1,3 +1,10 @@
+package commands;
+import view.GameUI;
+import model.GameState;
+import model.Item;
+import model.Player;
+import model.Room;
+
 public class TakeCommand implements Command {
     private String targetItem;
 

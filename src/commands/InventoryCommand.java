@@ -1,3 +1,9 @@
+package commands;
+import view.GameUI;
+import model.GameState;
+import model.Item;
+import model.Player;
+
 import java.util.List;
 
 public class InventoryCommand implements Command {

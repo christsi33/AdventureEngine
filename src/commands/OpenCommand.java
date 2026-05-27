@@ -1,4 +1,8 @@
-import java.util.List;
+package commands;
+import view.GameUI;
+import model.GameState;
+import model.Player;
+import model.Room;
 
 public class OpenCommand implements Command {
     private String target;
