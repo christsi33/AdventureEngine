@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Stack;
 import java.util.List;
-
 import com.google.gson.Gson;
 
 public class GameState {
@@ -15,6 +14,7 @@ public class GameState {
     public Player player = new Player();
 
     private transient GameUI ui;
+    private List<NPC> npcs;
 
     private transient Stack<String> undoStack = new Stack<>();
     private transient Stack<String> redoStack = new Stack<>();
@@ -87,5 +87,16 @@ public class GameState {
         GameState nextState = gson.fromJson(nextStateStr, GameState.class);
         this.restoreFrom(nextState);
         return true;
+    }
+
+    public void initializeNPCsInRooms() {
+        if (npcs != null && rooms != null) {
+            for (NPC npc : npcs) {
+                Room room = rooms.get(npc.getCurrentRoom());
+                if (room != null) {
+                    room.addNPC(npc);
+                }
+            }
+        }
     }
 }

@@ -19,6 +19,7 @@ public class Main {
         if (OptionalState.isEmpty()) return;
         GameState state = OptionalState.get();
         state.setupGame();
+        state.initializeNPCsInRooms();
 
         GameUI ui = new GameUI("recourses/messages.json");
         state.setUI(ui);
