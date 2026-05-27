@@ -126,13 +126,7 @@
           "name": "Workbench",
           "description": "Covered in oil and rusty tools.",
           "trap": null,
-          "items": [
-            {
-              "id": "wire_cutters",
-              "name": "Wire Cutters",
-              "description": "Sharp enough to cut thick wires."
-            }
-          ]
+          "items": []
         },
         {
           "id": "car",
@@ -215,5 +209,50 @@
         }
       ]
     }
-  }
+  },
+  "npcs": [
+    {
+      "id": "mechanic",
+      "name": "Former Vault Mechanic",
+      "currentRoom": "hallway",
+      "currentState": "UNKNOWN",
+      "states": {
+        "UNKNOWN": {
+          "dialogue": "Hey, back off! Don't touch those wires, you'll get electrocuted!",
+          "requiredItem": null,
+          "givenItem": null,
+          "nextState": "MET_PLAYER",
+          "moveToRoom": "garage"
+        },
+        "MET_PLAYER": {
+          "dialogue": "I need a light source to see under this car. Got anything?",
+          "requiredItem": "flashlight",
+          "givenItem": null,
+          "nextState": "HELPED",
+          "moveToRoom": null
+        },
+        "HELPED": {
+          "dialogue": "Thanks for the light. Take these wire cutters, you'll need them at the exit.",
+          "requiredItem": null,
+          "givenItem": "wire_cutters",
+          "nextState": "AT_EXIT",
+          "moveToRoom": "exit_room"
+        },
+        "HOSTILE": {
+          "dialogue": "Stay away from me, you maniac!",
+          "requiredItem": null,
+          "givenItem": null,
+          "nextState": "HOSTILE",
+          "moveToRoom": "garage"
+        },
+        "AT_EXIT": {
+          "dialogue": "Alright, let's defuse this bomb together. I'll guide you.",
+          "requiredItem": null,
+          "givenItem": null,
+          "nextState": "AT_EXIT",
+          "moveToRoom": null
+        }
+      }
+    }
+  ]
 }
