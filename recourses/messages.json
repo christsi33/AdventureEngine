@@ -1,7 +1,7 @@
 {
   "welcome": "Welcome to Project: Surface! ",
   "intro_lore": "\n=================================================\n\nYou wake up with a pounding headache in a cold, dim room.\nThe air is stale, thick with the smell of rust and decay.\n\nYour memory is a blur, but the flashing red emergency lights\nand the biohazard warnings tell you one thing:\nThis underground facility is in lockdown, and it's not safe here.\n\nYou must find the access keys, unlock the Main Gate,\nand escape to the surface before the backup power dies completely...\n\n=================================================\n",
-  "help_menu": "\n--- AVAILABLE COMMANDS ---\n- go [direction] (north, south, east, west)\n- look / look at [object] (examine your surroundings)\n- take [item] (pick up an item)\n- inventory (check your bag)\n- open [object] with [item] (use an item on something)\n- save / load (save or resume your progress)\n- quit (exit game)\n--------------------------",
+  "help_menu": "\n--- AVAILABLE COMMANDS ---\n- go [direction] (north, south, east, west)\n- look / look at [object] (examine your surroundings)\n- take [item] (pick up an item)\n- inventory (check your bag)\n- open [object] with [item] (use an item on something)\n- talk Interact with characters you meet on your journey. \n- save / load (save or resume your progress)\n- quit (exit game)\n--------------------------",
   "prompt": "\n>>",
   "unknown_command": "I don't understand '%s'. Try using simple verbs like 'go', 'look' or 'take'.",
   "trap_activated": "\n!!! TRAP ACTIVATED !!!",
@@ -35,5 +35,7 @@
   "inventory_title": "You have:",
   "inventory_item": "- %s: %s",
   "inventory_not_player": "You are not a player.",
-  "no_grammar": "Error: No grammar found. The game cannot start."
+  "no_grammar": "Error: No grammar found. The game cannot start.",
+  "talk_to_whom": "Talk to whom? (e.g. 'talk mechanic')",
+  "no_one_here": "There is no one here by that name."
 }

@@ -3,6 +3,7 @@ import view.GameUI;
 import model.GameState;
 import model.Item;
 import model.Room;
+import java.util.List;
 
 public class LookCommand  implements Command {
 
@@ -22,8 +23,8 @@ public class LookCommand  implements Command {
         GameUI ui = state.getUI();
 
         if (target.isEmpty()) {
-           ui.print("look_room_title", currentRoom.name);
-           ui.printRaw(currentRoom.description);
+            ui.print("look_room_title", currentRoom.name);
+            ui.printRaw(currentRoom.description);
 
             if (currentRoom.locations != null && !currentRoom.locations.isEmpty()) {
                 ui.print("look_points_of_interest");
@@ -39,6 +40,15 @@ public class LookCommand  implements Command {
                 }
                 ui.printRaw("");
             }
+
+            List<model.NPC> npcs = currentRoom.getNpcs();
+            if (npcs != null && !npcs.isEmpty()) {
+                for (model.NPC npc : npcs) {
+                    ui.printRaw("[!] " + npc.getName() + " is standing here.");
+                }
+                ui.printRaw("");
+            }
+
             return;
         }
 
@@ -77,7 +87,6 @@ public class LookCommand  implements Command {
                 }
             }
         }
-
         ui.print("look_not_found", target);
     }
 }

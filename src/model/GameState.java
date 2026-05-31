@@ -99,4 +99,8 @@ public class GameState {
             }
         }
     }
+
+    public Map<String, Room> getRooms() {
+        return rooms;
+    }
 }

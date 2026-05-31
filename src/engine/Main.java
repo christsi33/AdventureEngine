@@ -37,6 +37,7 @@ public class Main {
             parser.registerCommand("undo", arg -> new UndoCommand());
             parser.registerCommand("redo", arg -> new RedoCommand());
             parser.registerCommand("help", arg -> new HelpCommand());
+            parser.registerCommand("talk", arg -> new TalkCommand(arg));
         }
         else{
             ui.print("no_grammar");
