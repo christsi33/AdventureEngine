@@ -18,7 +18,7 @@ public class TalkCommand implements Command {
         GameUI ui = state.getUI();
 
         if (target == null || target.trim().isEmpty()) {
-            ui.print("Talk to whom?");
+            ui.print("talk_to_whom");
             return;
         }
 
@@ -41,6 +41,7 @@ public class TalkCommand implements Command {
         if (activeState != null && activeState.getDialogue() != null) {
             ui.printRaw("[" + targetNPC.getName() + "]: \"" + activeState.getDialogue() + "\"");
             boolean conditionMet = false;
+            boolean autoContinue = false;
 
             if (activeState.getRequiredItem() == null) {
                 conditionMet = true;
@@ -50,6 +51,7 @@ public class TalkCommand implements Command {
                 if(state.getPlayer().hasItem(activeState.getRequiredItem())) {
                     ui.printRaw("\n[System]: You showed the " + activeState.getRequiredItem() + " to the mechanic.");
                     conditionMet = true;
+                    autoContinue = true;
                 }
             }
 
@@ -77,6 +79,35 @@ public class TalkCommand implements Command {
                         nextRoom.addNPC(targetNPC);
                     }
                     ui.printRaw("\n" + targetNPC.getName() + " walks away towards the " + activeState.getMoveToRoom() + "...");
+                }
+
+                if(autoContinue) {
+                    NPCState newState = targetNPC.getActiveState();
+                    if(newState != null && newState.getDialogue() != null) {
+                        ui.printRaw("[" + targetNPC.getName() + "]: \"" + newState.getDialogue() + "\"");
+
+                        if(newState.getGivenItem() != null) {
+                            String itemId = newState.getGivenItem();
+                            String itemName = itemId.replace("_", " ");
+                            Item newItem = new Item(itemId, itemName, "Acquired from the Mechanic.");
+                            state.getPlayer().addItem(newItem);
+                            ui.printRaw("\n[System]: You received the " + newItem.getName() + "!");
+                        }
+
+                        if(newState.getNextState() != null) {
+                            targetNPC.setCurrentState(newState.getNextState());
+                        }
+
+                        if(newState.getMoveToRoom() != null) {
+                            currentRoom.removeNPC(targetNPC);
+                            targetNPC.setCurrentRoom(activeState.getMoveToRoom());
+                            Room nextRoom = state.getRooms().get(activeState.getMoveToRoom());
+                            if(nextRoom != null) {
+                                nextRoom.addNPC(targetNPC);
+                            }
+                            ui.printRaw("\n" + targetNPC.getName() + " walks away towards the " + newState.getMoveToRoom() + "...");
+                        }
+                    }
                 }
             }
         }
