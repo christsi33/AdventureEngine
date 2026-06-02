@@ -9,20 +9,25 @@ public class OpenCommand implements Command {
     private String tool;
 
     public OpenCommand(String argument) {
-        this.target = (target == null) ? "" : target.toLowerCase().replace("_","").trim();
+        if(argument == null) {
+            argument = "";
+        }
+        else {
+            argument = argument.toLowerCase().trim();
+        }
 
-        if(argument.contains("on")){
-            String[] parts = argument.split("on", 2);
-            this.tool = parts[0].trim();
-            this.target = parts[1].trim();
+        if (argument.contains("on")){
+            String[] parts=argument.split(" on ", 2);
+            this.target = parts[0].trim();
+            this.tool = parts[1].trim();
         }
-        else if(argument.contains("with")){
-            String[] parts = argument.split("with", 2);
-            this.tool = parts[0].trim();
-            this.target = parts[1].trim();
+        else if (argument.contains(" with ")){
+            String[] parts=argument.split(" with ", 2);
+            this.target = parts[0].trim();
+            this.tool = parts[1].trim();
         }
-        else{
-            this.tool = argument;
+        else {
+            this.target = argument;
             this.tool = "";
         }
     }
