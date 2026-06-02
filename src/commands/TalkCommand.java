@@ -79,6 +79,7 @@ public class TalkCommand implements Command {
                         nextRoom.addNPC(targetNPC);
                     }
                     ui.printRaw("\n" + targetNPC.getName() + " walks away towards the " + activeState.getMoveToRoom() + "...");
+                    autoContinue = false;
                 }
 
                 if(autoContinue) {

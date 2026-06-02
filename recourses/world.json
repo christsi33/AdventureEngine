@@ -105,7 +105,7 @@
           "name": "Heavy Iron Door",
           "description": "The door is on a spring mechanism. It wants to slam shut.",
           "trap": {
-            "trigger": "enter",
+            "trigger": "interact",
             "required_item": "metal_pipe",
             "game_over_message": "The heavy door slammed shut behind you. It's locked from outside. You are trapped forever. GAME OVER!"
           },
@@ -232,21 +232,21 @@
           "moveToRoom": null
         },
         "HELPED": {
-          "dialogue": "Thanks for the light. Take these wire cutters, you'll need them at the exit.",
+          "dialogue": "Thanks for the light. Take these wire cutters...\n Wait a minute, what are you doing here anyway?\n Don't move, you look dangerous!",
           "requiredItem": null,
           "givenItem": "wire_cutters",
+          "nextState": "HOSTILE",
+          "moveToRoom": null
+        },
+        "HOSTILE": {
+          "dialogue": "Stay away from me, you maniac!\n I won't let you pass through to the Clinic!",
+          "requiredItem": "metal_pipe",
+          "givenItem": null,
           "nextState": "AT_EXIT",
           "moveToRoom": "exit_room"
         },
-        "HOSTILE": {
-          "dialogue": "Stay away from me, you maniac!",
-          "requiredItem": null,
-          "givenItem": null,
-          "nextState": "HOSTILE",
-          "moveToRoom": "garage"
-        },
         "AT_EXIT": {
-          "dialogue": "Alright, let's defuse this bomb together. I'll guide you.",
+          "dialogue": "Alright, alright! Put that heavy pipe down!\n Let's just defuse this bomb together. I'll guide you.",
           "requiredItem": null,
           "givenItem": null,
           "nextState": "AT_EXIT",
