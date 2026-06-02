@@ -7,10 +7,10 @@ public class UndoCommand implements Command {
     public void execute(GameState state) {
         GameUI ui = state.getUI();
         if (state.undo()) {
-            ui.printRaw("Time rewinds... (Undo successful)");
+            ui.print("undo_success");
             new LookCommand("").execute(state); 
         } else {
-            ui.printRaw("There is nothing to undo.");
+            ui.print("undo_fail");
         }
     }
 }

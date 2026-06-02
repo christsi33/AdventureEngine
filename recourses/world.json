@@ -1,4 +1,6 @@
 {
+  "gameTitle": "Escape the Banker",
+  "introLore": "\n=================================================\\n\\nYou wake up with a pounding headache in a cold, dim room.\\nThe air is stale, thick with the smell of rust and decay.\\n\\nYour memory is a blur, but the flashing red emergency lights\\nand the biohazard warnings tell you one thing:\\nThis underground facility is in lockdown, and it's not safe here.\\n\\nYou must find the access keys, unlock the Main Gate,\\nand escape to the surface before the backup power dies completely...\\n\\n=================================================\\n",
   "initialRoomId": "shelter",
   "rooms": {
     "shelter": {

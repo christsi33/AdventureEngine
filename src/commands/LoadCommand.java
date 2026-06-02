@@ -30,7 +30,7 @@ public class LoadCommand implements Command {
            }
        }
        catch (Exception e){
-           ui.printRaw("No saved file found!");
+           ui.print("load_no_file");
            return;
        }
        try {
@@ -45,12 +45,12 @@ public class LoadCommand implements Command {
                 state.getHistory().clear();
             }
            else{
-               ui.printRaw("Failed to load game!");
+                ui.print("load_fail");
                return;
             }
        }
        catch (Exception e){
-           ui.printRaw("Failed to reset game state: " + e.getMessage());
+           ui.print("load_reset_fail", e.getMessage());
            return;
        }
 
@@ -65,7 +65,7 @@ public class LoadCommand implements Command {
            }
        }
        ui.setMuted(false);
-       ui.printRaw("Loaded game successfully!");
+       ui.print("load_success");
 
        new LookCommand("").execute(state);
    }

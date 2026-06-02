@@ -39,7 +39,7 @@ public class TalkCommand implements Command {
 
         NPCState activeState = targetNPC.getActiveState();
         if (activeState != null && activeState.getDialogue() != null) {
-            ui.printRaw("[" + targetNPC.getName() + "]: \"" + activeState.getDialogue() + "\"");
+            ui.print("talk_dialogue", targetNPC.getName(), activeState.getDialogue());
             boolean conditionMet = false;
             boolean autoContinue = false;
 
@@ -49,7 +49,7 @@ public class TalkCommand implements Command {
             }
             else{
                 if(state.getPlayer().hasItem(activeState.getRequiredItem())) {
-                    ui.printRaw("\n[System]: You showed the " + activeState.getRequiredItem() + " to the mechanic.");
+                    ui.print("talk_show_item", activeState.getRequiredItem(), targetNPC.getName());
                     conditionMet = true;
                     autoContinue = true;
                 }
@@ -60,14 +60,12 @@ public class TalkCommand implements Command {
 
                 if (activeState.getGivenItem() != null) {
                     String itemId = activeState.getGivenItem();
-
                     String itemName = itemId.replace("_", " ");
 
-                    Item newItem = new Item(itemId, itemName, "Acquired from the Vault Mechanic.");
-
+                    Item newItem = new Item(itemId, itemName, "Acquired from " + targetNPC.getName() + ".");
                     state.getPlayer().addItem(newItem);
 
-                    ui.printRaw("\n[System]: You received the " + newItem.getName() + "!");
+                    ui.print("talk_received_item", newItem.getName());
                 }
 
                 if(activeState.getMoveToRoom() != null) {
@@ -78,21 +76,21 @@ public class TalkCommand implements Command {
                     if(nextRoom != null) {
                         nextRoom.addNPC(targetNPC);
                     }
-                    ui.printRaw("\n" + targetNPC.getName() + " walks away towards the " + activeState.getMoveToRoom() + "...");
+                    ui.print("talk_walks_away", targetNPC.getName(), activeState.getMoveToRoom());
                     autoContinue = false;
                 }
 
                 if(autoContinue) {
                     NPCState newState = targetNPC.getActiveState();
                     if(newState != null && newState.getDialogue() != null) {
-                        ui.printRaw("[" + targetNPC.getName() + "]: \"" + newState.getDialogue() + "\"");
+                        ui.print("talk_dialogue", targetNPC.getName(), newState.getDialogue());
 
                         if(newState.getGivenItem() != null) {
                             String itemId = newState.getGivenItem();
                             String itemName = itemId.replace("_", " ");
-                            Item newItem = new Item(itemId, itemName, "Acquired from the Mechanic.");
+                            Item newItem = new Item(itemId, itemName, "Acquired from " + targetNPC.getName() + ".");
                             state.getPlayer().addItem(newItem);
-                            ui.printRaw("\n[System]: You received the " + newItem.getName() + "!");
+                            ui.print("talk_received_item", newItem.getName());
                         }
 
                         if(newState.getNextState() != null) {
@@ -106,14 +104,14 @@ public class TalkCommand implements Command {
                             if(nextRoom != null) {
                                 nextRoom.addNPC(targetNPC);
                             }
-                            ui.printRaw("\n" + targetNPC.getName() + " walks away towards the " + newState.getMoveToRoom() + "...");
+                            ui.print("talk_walks_away", targetNPC.getName(), newState.getMoveToRoom());
                         }
                     }
                 }
             }
         }
         else{
-            ui.printRaw(targetNPC.getName() + " has nothing to say right now.");
+            ui.print("talk_nothing_to_say", targetNPC.getName());
         }
     }
 }

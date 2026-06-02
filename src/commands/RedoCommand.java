@@ -7,10 +7,10 @@ public class RedoCommand implements Command {
     public void execute(GameState state) {
         GameUI ui = state.getUI();
         if (state.redo()) {
-            ui.printRaw("Time moves forward... (Redo successful)");
+            ui.print("redo_success");
             new LookCommand("").execute(state);
         } else {
-            ui.printRaw("There is nothing to redo.");
+            ui.print("redo_fail");
         }
     }
 }

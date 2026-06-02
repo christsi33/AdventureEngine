@@ -45,16 +45,16 @@ public class Main {
         }
         Scanner scanner = new Scanner(System.in);
 
-        ui.print("welcome");
-        ui.print("intro_lore");
-        ui.printRaw("Write /? for help menu");
+        ui.printRaw("Welcome to " + state.gameTitle + "!");
+        ui.printRaw(state.introLore);
+        ui.print("main_help_hint");
 
         new LookCommand("").execute(state);
 
         while (true) {
             ui.printInline("prompt");
             String input = scanner.nextLine().toLowerCase();
-            input = input.replaceAll("\\b(to|the|a|an|in|on|at|into)\\b", "");
+            input = input.replaceAll("\\b(the|a|an|into)\\b", "");
             input = input.replaceAll("\\s+", " ").trim();
 
             Optional<Command> cmdOpt = parser.parseInput(input);

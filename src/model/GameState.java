@@ -7,6 +7,8 @@ import java.util.List;
 import com.google.gson.Gson;
 
 public class GameState {
+    public String gameTitle;
+    public String introLore;
     public String initialRoomId;
     public Map<String, Room> rooms;
 
