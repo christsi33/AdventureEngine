@@ -45,11 +45,10 @@ public class Main {
         }
         Scanner scanner = new Scanner(System.in);
 
-        ui.print("welcome");
-        ui.print("intro_lore");
-        ui.printRaw("Write /? for help menu");
+        GameMenu menu = new GameMenu(ui, scanner, parser, state);
+        menu.show();
 
-        new LookCommand("").execute(state);
+
 
         while (true) {
             ui.printInline("prompt");
