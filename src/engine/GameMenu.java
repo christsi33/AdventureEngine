@@ -32,7 +32,7 @@ public class GameMenu {
             new LoadCommand(parser).execute(state);
         } else {
             ui.print("intro_lore");
-            ui.printRaw("Write /? for help menu");
+            ui.print("main_help_hint");
             new LookCommand("").execute(state);
         }
     }
