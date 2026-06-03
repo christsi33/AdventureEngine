@@ -48,9 +48,6 @@ public class Main {
         GameMenu menu = new GameMenu(ui, scanner, parser, state);
         menu.show();
 
-
-
-
         while (true) {
             ui.printInline("prompt");
             String input = scanner.nextLine().toLowerCase();

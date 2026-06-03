@@ -1,10 +1,12 @@
 package engine;
 
+import commands.Command;
 import commands.LoadCommand;
 import commands.LookCommand;
 import model.GameState;
 import view.GameUI;
 import java.util.Scanner;
+import java.util.Optional;
 
 public class GameMenu {
     private GameUI ui;
@@ -22,18 +24,21 @@ public class GameMenu {
 
 
     public void show() {
-        ui.print("welcome");
+        ui.printRaw("Welcome to " + state.gameTitle);
         ui.print("new_or_load");
         ui.printInline("prompt");
 
         String choice = scanner.nextLine().trim().toLowerCase();
-
-        if (choice.equals("load")) {
-            new LoadCommand(parser).execute(state);
-        } else {
-            ui.print("intro_lore");
+        Optional<Command> cmdOpt = parser.parseInput(choice);
+        if (cmdOpt.isPresent() &&  cmdOpt.get() instanceof LoadCommand) {
+            cmdOpt.get().execute(state);
+        }
+        else{
+            ui.printRaw(state.introLore);
             ui.print("main_help_hint");
             new LookCommand("").execute(state);
         }
+
+
     }
 }
