@@ -44,7 +44,7 @@ public class LookCommand  implements Command {
             List<model.NPC> npcs = currentRoom.getNpcs();
             if (npcs != null && !npcs.isEmpty()) {
                 for (model.NPC npc : npcs) {
-                    ui.printRaw("[!] " + npc.getName() + " is standing here.");
+                    ui.print("look_npc_present", npc.getName());
                 }
                 ui.printRaw("");
             }

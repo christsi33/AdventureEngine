@@ -14,10 +14,10 @@ public class SaveCommand implements Command {
             for(String cmd : state.getHistory()){
                 writer.println(cmd);
             }
-            ui.printRaw("Game Saved Successfully!");
+            ui.print("save_success");
         }
         catch (Exception e){
-            ui.printRaw("Failed to save game: " + e.getMessage());
+            ui.print("save_fail", e.getMessage());
         }
     }
 }

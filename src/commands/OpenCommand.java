@@ -53,7 +53,7 @@ public class OpenCommand implements Command {
                     if (loc.locked_with != null && !loc.locked_with.isEmpty()) {
 
                         if (!tool.isEmpty() && !player.hasItem(tool)) {
-                            ui.printRaw("You don't have the '" + tool + "' in your inventory.");
+                            ui.print("open_missing_tool", tool);
                             return;
                         }
 
@@ -66,7 +66,11 @@ public class OpenCommand implements Command {
                         }
 
                         if (hasAllKeys) {
-                            ui.printRaw(loc.unlock_message != null ? loc.unlock_message : "You successfully opened the " + loc.name + "!");
+                            if (loc.unlock_message != null) {
+                                ui.printRaw(loc.unlock_message);
+                            } else {
+                                ui.print("open_success_generic", loc.name);
+                            }
 
                             if (loc.is_win_condition) {
                                 ui.print("open_gate_win");
@@ -76,7 +80,7 @@ public class OpenCommand implements Command {
                             ui.print("open_gate_fail");
                         }
                     } else {
-                        ui.printRaw("The " + loc.name + " doesn't seem to be locked.");
+                        ui.print("open_not_locked", loc.name);
                     }
                     return;
                 }

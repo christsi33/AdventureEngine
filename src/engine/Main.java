@@ -50,10 +50,11 @@ public class Main {
 
 
 
+
         while (true) {
             ui.printInline("prompt");
             String input = scanner.nextLine().toLowerCase();
-            input = input.replaceAll("\\b(to|the|a|an|in|on|at|into)\\b", "");
+            input = input.replaceAll("\\b(the|a|an|into)\\b", "");
             input = input.replaceAll("\\s+", " ").trim();
 
             Optional<Command> cmdOpt = parser.parseInput(input);

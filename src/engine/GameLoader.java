@@ -14,7 +14,7 @@ public class GameLoader {
             state.currentRoomId = state.initialRoomId;
             return Optional.of(state);
         } catch (Exception e) {
-            System.out.println("Σφάλμα: Δεν βρέθηκε το αρχείο " + filename);
+            System.out.println("Error. File not found" + filename);
             return Optional.empty();
         }
     }
@@ -27,7 +27,7 @@ public class GameLoader {
             return Optional.of(config);
         }
         catch (Exception e) {
-            System.out.println("σφαλμα στη φορτοση του grammar:" + e.getMessage());
+            System.out.println("error loading grammar:" + e.getMessage());
             return Optional.empty();
         }
 
